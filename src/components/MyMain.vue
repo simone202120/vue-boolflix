@@ -5,7 +5,7 @@
             <li v-for="(filmSelez, index) in filmList" :key="index">
                 {{filmSelez.title}}-
                 {{filmSelez.original_title}}-
-                <img :src="urlBandiera" alt=""/>{{bandiera(filmSelez.original_language)}}
+                <img :src=urlBandiera alt=""/>{{bandiera(filmSelez.original_language)}}
                 {{voto(filmSelez.vote_average)}}
                 <img :src="'http://image.tmdb.org/t/p/w342/' + filmSelez.poster_path" alt=""/>
             </li>
