@@ -5,9 +5,11 @@
             <li v-for="(filmSelez, index) in filmList" :key="index">
                 {{filmSelez.title}}-
                 {{filmSelez.original_title}}-
-                <img :src=urlBandiera alt=""/>{{bandiera(filmSelez.original_language)}}
-                {{voto(filmSelez.vote_average)}}
-                <img :src="'http://image.tmdb.org/t/p/w342/' + filmSelez.poster_path" alt=""/>
+                <img :src="bandiera(filmSelez.original_language)" alt=""/>
+                <img :src="'http://image.tmdb.org/t/p/w185/' + filmSelez.poster_path" alt=""/>
+                <div>
+                    <i v-for="n in 5" :key='n' class="fa-star" :class="(n>voto(filmSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+                </div>
             </li>
             
         </ul>
@@ -17,9 +19,9 @@
             <li v-for="(serieSelez, index) in serieTv" :key="index">
                 {{serieSelez.name}}-
                 {{serieSelez.original_name}}-
-                <img :src="urlBandiera" alt=""/>{{bandiera(serieSelez.original_language)}}-
+                <img :src="bandiera(serieSelez.original_language)" alt=""/>-
                 {{voto(serieSelez.vote_average)}}
-                <img :src="'http://image.tmdb.org/t/p/w342/' + serieSelez.poster_path" alt=""/>
+                <img :src="'http://image.tmdb.org/t/p/w185/' + serieSelez.poster_path" alt=""/>
             </li>
         </ul>
     </div> 
@@ -34,28 +36,31 @@ export default {
     data(){
         return{
             urlCopertina:'https://image.tmdb.org/t/p/',
-            urlBandiera:""
+          
         }
     },
     methods:{
        voto(voto){
             let voti= voto /2;
-            let votoTo5=voti.toFixed();
-            return votoTo5
+            return voti.toFixed();
+           
         },
         bandiera(lingua){
             let bandiera=lingua;
             if(bandiera=='en'){
                 bandiera='gb'
-            }if(bandiera=="zh"){
+            }else if(bandiera=="zh"){
                 bandiera="cn"
-
-            }if(bandiera=="ja"){
+            } else if(bandiera=="ja"){
                 bandiera="jp"
+            }else if(bandiera=="ta"){
+                bandiera="th"
+            } else if(bandiera=="ko"){
+                bandiera="kr"
             }
-            let flag= 'https://flagcdn.com/16x12/'+ bandiera +'.png';
+            let flag= 'https://flagcdn.com/24x18/'+ bandiera +'.png';
            
-            this.urlBandiera=flag
+            return flag
             
         }
 
@@ -70,6 +75,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@fortawesome/fontawesome-free/css/all.css';
+    @import '~@fortawesome/fontawesome-free/css/all.css';
+
+    .yellow{
+        color:rgb(253, 253, 9)
+    }
 
 </style>
