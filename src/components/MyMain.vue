@@ -1,26 +1,51 @@
 <template>
     <main>
-        <div class="container">
-            <h1>FILM</h1>
+        <h1>FILM</h1>
+
+        <div class="container flex">
             <div v-for="(filmSelez,index) in filmList" :key="index" class="card">
-                <h4>TITOLO:{{filmSelez.title}}</h4>
-                <h4>TITOLO ORIGINLE:{{filmSelez.original_title}}</h4>
-                <div>
-                    <i v-for="n in 5" :key='n' class="fa-star" :class="(n>voto(filmSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+                <div class="poster">
+                    <img :src="'http://image.tmdb.org/t/p/w185/' + filmSelez.poster_path" alt=""/>
                 </div>
-                <h4>OVERVIEW:{{filmSelez.overview}}</h4>
-                <img :src="bandiera(filmSelez.original_language)" alt=""/>
+                <div class="info">
+                    <h4>TITLE:</h4><p>{{filmSelez.title}}</p>
+                    <h4>ORIGINAL TITLE:</h4> <p>{{filmSelez.original_title}}</p>
+                    <div>
+                        <h4>VOTO</h4>
+                        <i v-for="n in 5" :key='n' class="fa-star" :class="(n>voto(filmSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+                    </div>
+                    <div class="overview">
+                        <h4>OVERVIEW:</h4>
+                        <p>{{filmSelez.overview}}</p>
+                    </div>
+                    <H4>ORIGINAL LANGUAGE</H4>
+                    <img class="lingua" :src="bandiera(filmSelez.original_language)" alt=""/>
+                </div>
+                
             </div>
-            
-            <h1>serieTV</h1>
-            <div v-for="(serieSelez, id) in serieTv" :key="id" class="card">
-                <h4>TITOLO:{{serieSelez.name}}</h4>
-                <h4>TITOLO ORIGINLE:{{serieSelez.original_name}}</h4>
+        </div>
+
+        <h1>SERIETV</h1>
+
+        <div class="container flex">
+            <div v-for="serieSelez in serieTv" :key="serieSelez.id" class="card">
+                <div class="poster">
+                    <img :src="'http://image.tmdb.org/t/p/w185/' + serieSelez.poster_path" alt=""/>
+                </div>
+                <div class="info">
+                    <h4>TITOLO:</h4> <P>{{serieSelez.name}}</P>
+                    <h4>TITOLO ORIGINLE:</h4> <p>{{serieSelez.original_name}}</p>
                 <div>
+                    <h4>VOTO</h4>
                     <i v-for="x in 5" :key='x' class="fa-star" :class="(x>voto(serieSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
                 </div>
-                <h4>OVERVIEW:{{serieSelez.overview}}</h4>
+                <div class="overview">
+                    <h4>OVERVIEW:</h4>
+                    <P>{{serieSelez.overview}}</P>
+                </div>
+                <H4>ORIGINAL LANGUAGE</H4>
                 <img :src="bandiera(serieSelez.original_language)" alt=""/>
+                </div>
             </div>
         </div> 
     </main>
@@ -76,11 +101,66 @@ export default {
     @import '~@fortawesome/fontawesome-free/css/all.css';
     main{
         background-color: #171717;
-        color:white
+        color:white;
+        min-width: none;
     }
 
     .yellow{
         color:rgb(253, 253, 9)
     }
+    .flex{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .card{
+        width:calc(100% / 5);
+        height: 400px;
+        padding: 5px;
+        margin-top: 10px;
+        &:hover .poster{
+            display: none;
+            
+        }
+        &:hover .info{
+            transform: rotateX(180deg) 1;
+            display: inline-block;
+            
+            
+        }
+        .overview{
+            overflow-y: scroll;
+            max-height: 150px;
+        }
+        H4{
+            margin-top: 10px;
+            font-size: 15px;
+        }
+        p{
+            font-size: 12px;
+        }
+        .lingua{
+            margin-left: 40%;
+            margin-top: 15px;
+        }
+    }
+    h1{
+        margin-left: 70px;
+    }
+    .poster{
+        height: 100%;
+        
+        img{
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+
+    }
+    .info{
+        display: none;
+    }
+
 
 </style>

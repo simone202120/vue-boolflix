@@ -9,4 +9,11 @@ export default {
 
 <style>
 
-</style>
+</style> .poster{
+    height: 100%;
+
+    img{
+        height: 100%;
+        object-fit: contain;
+    }
+} 
