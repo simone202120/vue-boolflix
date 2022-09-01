@@ -1,31 +1,29 @@
 <template>
-    <div>
-        <ul>
-            <h1>Film</h1> 
-            <li v-for="(filmSelez, index) in filmList" :key="index">
-                {{filmSelez.title}}-
-                {{filmSelez.original_title}}-
-                <img :src="bandiera(filmSelez.original_language)" alt=""/>
-                <img :src="'http://image.tmdb.org/t/p/w185/' + filmSelez.poster_path" alt=""/>
+    <main>
+        <div class="container">
+            <h1>FILM</h1>
+            <div v-for="(filmSelez,index) in filmList" :key="index" class="card">
+                <h4>TITOLO:{{filmSelez.title}}</h4>
+                <h4>TITOLO ORIGINLE:{{filmSelez.original_title}}</h4>
                 <div>
                     <i v-for="n in 5" :key='n' class="fa-star" :class="(n>voto(filmSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
                 </div>
-            </li>
+                <h4>OVERVIEW:{{filmSelez.overview}}</h4>
+                <img :src="bandiera(filmSelez.original_language)" alt=""/>
+            </div>
             
-        </ul>
-
-        <ul>
-            <h1>SerieTv</h1>
-            <li v-for="(serieSelez, index) in serieTv" :key="index">
-                {{serieSelez.name}}-
-                {{serieSelez.original_name}}-
-                <img :src="bandiera(serieSelez.original_language)" alt=""/>-
-                {{voto(serieSelez.vote_average)}}
-                <img :src="'http://image.tmdb.org/t/p/w185/' + serieSelez.poster_path" alt=""/>
-            </li>
-        </ul>
-    </div> 
-  
+            <h1>serieTV</h1>
+            <div v-for="(serieSelez, id) in serieTv" :key="id" class="card">
+                <h4>TITOLO:{{serieSelez.name}}</h4>
+                <h4>TITOLO ORIGINLE:{{serieSelez.original_name}}</h4>
+                <div>
+                    <i v-for="x in 5" :key='x' class="fa-star" :class="(x>voto(serieSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+                </div>
+                <h4>OVERVIEW:{{serieSelez.overview}}</h4>
+                <img :src="bandiera(serieSelez.original_language)" alt=""/>
+            </div>
+        </div> 
+    </main>
 </template>
 
 <script>
@@ -76,6 +74,10 @@ export default {
 
 <style lang="scss">
     @import '~@fortawesome/fontawesome-free/css/all.css';
+    main{
+        background-color: #171717;
+        color:white
+    }
 
     .yellow{
         color:rgb(253, 253, 9)
