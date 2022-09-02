@@ -143,7 +143,7 @@ export default {
         
         
         .overview{
-            overflow-y: scroll;
+            overflow-y: auto;
             max-height: 150px;
         }
         H4{
@@ -190,11 +190,25 @@ export default {
         background-color: #bbb;
         color: black;
     }
-    
+
     .flip-card-back {
         background-color:  #171717;
         color: white;
         transform: rotateY(180deg);
     }
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 0, 0, 0.71); 
+        border-radius: 10px;
+    }
+
 
 </style>
