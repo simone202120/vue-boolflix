@@ -119,16 +119,15 @@ export default {
         height: 400px;
         padding: 5px;
         margin-top: 10px;
-        &:hover .poster{
-            display: none;
+        &:hover .poster{    
+            transform: rotateY(90deg);
             
         }
         &:hover .info{
-            transform: rotateX(180deg) 1;
+            
             display: inline-block;
-            
-            
         }
+        
         .overview{
             overflow-y: scroll;
             max-height: 150px;
@@ -149,6 +148,7 @@ export default {
         margin-left: 70px;
     }
     .poster{
+        transition-duration: 0.5s;
         height: 100%;
         
         img{
@@ -160,6 +160,7 @@ export default {
     }
     .info{
         display: none;
+       
     }
 
 
