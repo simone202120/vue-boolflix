@@ -4,11 +4,11 @@
         <div>
             <img id="logo" src="../assets/netflix_preview_rev_1.png" alt="">
         </div>
+
         <div>
             <input type="text" v-model="imputText">
             <button @click="$emit ('search', imputText)">Cerca <i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-
     </div>
   </header>
 </template>
@@ -53,6 +53,7 @@ export default {
         justify-content: space-between;
         align-items: center;
     }
+    
     #logo{
         height: 40px;
     }

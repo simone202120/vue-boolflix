@@ -25,6 +25,7 @@ export default {
       serieTv:[]
     }
   },
+  
   methods:{
     searching(searchedText){
       axios.get("https://api.themoviedb.org/3"+ "/search/movie?api_key=9ac8239a13b40749534dae9c92f8126a&language=it-IT"+"&query="+searchedText)

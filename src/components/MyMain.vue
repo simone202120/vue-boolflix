@@ -1,53 +1,65 @@
 <template>
     <main>
+
         <h1>FILM</h1>
 
         <div class="container flex">
-            <div v-for="(filmSelez,index) in filmList" :key="index" class="card">
-                <div class="poster">
-                    <img :src="'http://image.tmdb.org/t/p/w185/' + filmSelez.poster_path" alt=""/>
-                </div>
-                <div class="info">
-                    <h4>TITLE:</h4><p>{{filmSelez.title}}</p>
-                    <h4>ORIGINAL TITLE:</h4> <p>{{filmSelez.original_title}}</p>
-                    <div>
-                        <h4>VOTO</h4>
-                        <i v-for="n in 5" :key='n' class="fa-star" :class="(n>voto(filmSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+            <div v-for="(filmSelez,index) in filmList" :key="index" class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="poster flip-card-front">
+                        <img :src="'http://image.tmdb.org/t/p/w185/' + filmSelez.poster_path" alt=""/>
                     </div>
-                    <div class="overview">
-                        <h4>OVERVIEW:</h4>
-                        <p>{{filmSelez.overview}}</p>
+
+                    <div class="info flip-card-back">
+                        <h4>TITLE:</h4><p>{{filmSelez.title}}</p>
+                        <h4>ORIGINAL TITLE:</h4> <p>{{filmSelez.original_title}}</p>
+
+                        <div>
+                            <h4>VOTO</h4>
+                            <i v-for="n in 5" :key='n' class="fa-star" :class="(n>voto(filmSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+                        </div>
+
+                        <div class="overview">
+                            <h4>OVERVIEW:</h4>
+                            <p>{{filmSelez.overview}}</p>
+                        </div>
+
+                        <H4>ORIGINAL LANGUAGE</H4>
+                        <img class="lingua" :src="bandiera(filmSelez.original_language)" alt=""/>
                     </div>
-                    <H4>ORIGINAL LANGUAGE</H4>
-                    <img class="lingua" :src="bandiera(filmSelez.original_language)" alt=""/>
                 </div>
-                
             </div>
         </div>
 
         <h1>SERIETV</h1>
 
         <div class="container flex">
-            <div v-for="serieSelez in serieTv" :key="serieSelez.id" class="card">
-                <div class="poster">
-                    <img :src="'http://image.tmdb.org/t/p/w185/' + serieSelez.poster_path" alt=""/>
-                </div>
-                <div class="info">
-                    <h4>TITOLO:</h4> <P>{{serieSelez.name}}</P>
-                    <h4>TITOLO ORIGINLE:</h4> <p>{{serieSelez.original_name}}</p>
-                <div>
-                    <h4>VOTO</h4>
-                    <i v-for="x in 5" :key='x' class="fa-star" :class="(x>voto(serieSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
-                </div>
-                <div class="overview">
-                    <h4>OVERVIEW:</h4>
-                    <P>{{serieSelez.overview}}</P>
-                </div>
-                <H4>ORIGINAL LANGUAGE</H4>
-                <img :src="bandiera(serieSelez.original_language)" alt=""/>
+            <div v-for="(serieSelez,index) in serieTv" :key="index" class="card flip-card">
+             <div class="flip-card-inner">
+                    <div class="poster flip-card-front">
+                        <img :src="'http://image.tmdb.org/t/p/w185/' + serieSelez.poster_path" alt=""/>
+                    </div>
+
+                    <div class="info flip-card-back">
+                        <h4>TITLE:</h4><p>{{serieSelez.name}}</p>
+                        <h4>ORIGINAL TITLE:</h4> <p>{{serieSelez.original_name}}</p>
+
+                        <div>
+                            <h4>VOTO</h4>
+                            <i v-for="x in 5" :key='x' class="fa-star" :class="(x>voto(serieSelez.vote_average))? 'fa-regular yellow': 'fa-solid yellow'"></i>
+                        </div>
+
+                        <div class="overview">
+                            <h4>OVERVIEW:</h4>
+                            <p>{{serieSelez.overview}}</p>
+                        </div>
+
+                        <H4>ORIGINAL LANGUAGE</H4>
+                        <img class="lingua" :src="bandiera(serieSelez.original_language)" alt=""/>
+                    </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </main>
 </template>
 
@@ -58,16 +70,17 @@ export default {
     name:'MyMain',
     data(){
         return{
-            urlCopertina:'https://image.tmdb.org/t/p/',
           
         }
     },
     methods:{
        voto(voto){
+
             let voti= voto /2;
             return voti.toFixed();
-           
+
         },
+
         bandiera(lingua){
             let bandiera=lingua;
             if(bandiera=='en'){
@@ -114,19 +127,20 @@ export default {
         align-items: center;
         flex-wrap: wrap;
     }
+    .flip-card-inner{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
     .card{
         width:calc(100% / 5);
         height: 400px;
         padding: 5px;
         margin-top: 10px;
-        &:hover .poster{    
-            transform: rotateY(90deg);
-            
-        }
-        &:hover .info{
-            
-            display: inline-block;
-        }
+        perspective: 1000px;
+        
         
         .overview{
             overflow-y: scroll;
@@ -144,9 +158,11 @@ export default {
             margin-top: 15px;
         }
     }
+
     h1{
         margin-left: 70px;
     }
+
     .poster{
         transition-duration: 0.5s;
         height: 100%;
@@ -158,10 +174,27 @@ export default {
         }
 
     }
-    .info{
-        display: none;
        
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
     }
 
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        background-color: #bbb;
+        color: black;
+    }
+    
+    .flip-card-back {
+        background-color:  #171717;
+        color: white;
+        transform: rotateY(180deg);
+    }
 
 </style>
